@@ -1,10 +1,14 @@
 import React from "react";
 import Banner from "../Banner/Banner";
+import Category from "../Category/Category";
 
 const Home = () => {
   return (
     <div>
-      <Banner></Banner>;
+      {/* banner  */}
+      <Banner></Banner>
+      {/* category  */}
+      <Category></Category>
     </div>
   );
 };
