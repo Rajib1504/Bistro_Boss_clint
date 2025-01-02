@@ -9,7 +9,6 @@ import soupImg from "../../assets/menu/soup-bg.jpg";
 // import drinksImg from "../../assets/menu/";
 import MenuCategory from "./Menu Category/MenuCategory";
 import SectionTitle from "../../Components/SectionTitle/SectionTitle";
-import SectionButton from "../../Home/Home/Shared/SectionButton/SectionButton";
 import useMenu from "../../hooks/hooks menu/useMenu";
 const Menu = () => {
   const [menu] = useMenu();
@@ -32,7 +31,6 @@ const Menu = () => {
       ></SectionTitle>
       {/* Offerd section  */}
       <MenuCategory item={offered}></MenuCategory>
-      <SectionButton btnTitle={"ORDER YOUR FAVOURITE FOOD"}></SectionButton>
       {/* Dessert Section  */}
       <MenuCategory
         item={desserts}

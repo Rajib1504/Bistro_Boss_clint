@@ -1,6 +1,7 @@
 import React from "react";
 import MenuItem from "../../../Home/Home/Shared/MenuItem/MenuItem";
 import Cover from "../../../Home/Home/Shared/Cover/Cover";
+import { Link } from "react-router-dom";
 
 const MenuCategory = ({ item, coverImg, title }) => {
   return (
@@ -11,6 +12,13 @@ const MenuCategory = ({ item, coverImg, title }) => {
           <MenuItem key={_id} item={item} title={"dessert"}></MenuItem>
         ))}
       </div>
+      <Link to={"/order"}>
+        <div className="flex justify-center items-center my-3">
+          <button className="btn btn-outline  mt-4 border-0 border-b-4">
+            ORDER YOUR FAVOURITE FOOD{" "}
+          </button>
+        </div>
+      </Link>
     </div>
   );
 };

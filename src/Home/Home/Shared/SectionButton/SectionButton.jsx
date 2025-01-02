@@ -1,5 +1,3 @@
-import React from "react";
-
 const SectionButton = ({ btnTitle }) => {
   return (
     <div className="flex justify-center items-center my-3">
