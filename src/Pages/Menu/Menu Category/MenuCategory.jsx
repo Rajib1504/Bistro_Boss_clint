@@ -1,15 +1,16 @@
+import React from "react";
 import MenuItem from "../../../Home/Home/Shared/MenuItem/MenuItem";
-import useMenu from "../../../hooks/hooks menu/useMenu";
+import Cover from "../../../Home/Home/Shared/Cover/Cover";
 
-const MenuCategory = () => {
-  const [menu] = useMenu();
-  const offers = menu.filter((item) => item.category === "offered");
-  console.log(offers);
+const MenuCategory = ({ item, coverImg, title }) => {
   return (
-    <div className="grid sm:grid-cols-2 gap-10">
-      {offers.map((item, _id) => (
-        <MenuItem key={_id} item={item}></MenuItem>
-      ))}
+    <div className="pt-8">
+      {title && <Cover img={coverImg} title={title}></Cover>}
+      <div className="grid sm:grid-cols-2 gap-10 my-16">
+        {item.map((item, _id) => (
+          <MenuItem key={_id} item={item} title={"dessert"}></MenuItem>
+        ))}
+      </div>
     </div>
   );
 };

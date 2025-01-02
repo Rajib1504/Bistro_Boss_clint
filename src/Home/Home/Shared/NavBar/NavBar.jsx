@@ -4,11 +4,14 @@ const NavBar = () => {
   const link = (
     <>
       <li>
+        <Link to={"/"}>Home</Link>
+      </li>
+      <li>
         <Link to={"/menu"}>Our Menu</Link>
       </li>
 
       <li>
-        <a>Item 3</a>
+        <Link to={"/order"}>Order Food</Link>
       </li>
     </>
   );
