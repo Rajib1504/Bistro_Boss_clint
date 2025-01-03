@@ -1,14 +1,18 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Footer from "../Home/Home/Shared/Footer/Footer";
 import NavBar from "../Home/Home/Shared/NavBar/NavBar";
 
 const Main = () => {
+  // navbar and footer will not show in the login page
+  const location = useLocation();
+  console.log(location);
+  const noNavFooter = location.pathname.includes("login");
   return (
     <div>
-      <NavBar></NavBar>
+      {noNavFooter || <NavBar></NavBar>}
       <Outlet></Outlet>
-      <Footer></Footer>
+      {noNavFooter || <Footer></Footer>}
     </div>
   );
 };
