@@ -4,13 +4,16 @@ import "./index.css";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./Router/Router";
 import { HelmetProvider } from "react-helmet-async";
+import AuthPrvider from "./Provider/AuthPrvider";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <HelmetProvider>
-      <div className="max-w-screen-xl mx-auto">
-        <RouterProvider router={router} />
-      </div>
-    </HelmetProvider>
+    <AuthPrvider>
+      <HelmetProvider>
+        <div className="max-w-screen-xl mx-auto">
+          <RouterProvider router={router} />
+        </div>
+      </HelmetProvider>
+    </AuthPrvider>
   </StrictMode>
 );
