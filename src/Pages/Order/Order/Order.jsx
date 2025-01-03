@@ -4,18 +4,26 @@ import Cover from "../../../Home/Home/Shared/Cover/Cover";
 import OrderImg from "../../../assets/shop/banner2.jpg";
 import { useState } from "react";
 import useMenu from "../../../hooks/hooks menu/useMenu";
-
 import OrderFoodTab from "../OrderFoodTab/OrderFoodTab";
+import { useParams } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 const Order = () => {
-  const [tabIndex, setTabIndex] = useState(0);
+  const categories = ["salad", "pizza", "soup", "desserts", "drinks"];
+  const { category } = useParams();
+  const inetialIndex = categories.indexOf(category);
+  const [tabIndex, setTabIndex] = useState(inetialIndex);
+
   const [menu] = useMenu();
-  const soup = menu.filter((item) => item.category === "soup");
-  const drinks = menu.filter((item) => item.category === "drinks");
   const salad = menu.filter((item) => item.category === "salad");
-  const desserts = menu.filter((item) => item.category === "dessert");
   const pizza = menu.filter((item) => item.category === "pizza");
+  const soup = menu.filter((item) => item.category === "soup");
+  const desserts = menu.filter((item) => item.category === "dessert");
+  const drinks = menu.filter((item) => item.category === "drinks");
   return (
     <div>
+      <Helmet>
+        <title>Bistro Boss || Order Food</title>
+      </Helmet>
       <Cover img={OrderImg} title={"Order food"}></Cover>
       <Tabs defaultIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
         <TabList>
