@@ -35,7 +35,7 @@ const Signup = () => {
                   className="input input-bordered"
                 />
                 {errors.name && (
-                  <small className="text-red-500">This field is required</small>
+                  < className="text-red-500">This field is required</>
                 )}
               </div>
               <div className="form-control">
