@@ -5,14 +5,28 @@ import { getAuth } from "firebase/auth";
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
+// const firebaseConfig = {
+//   apiKey: import.meta.env.VITE_apiKey,
+//   authDomain: import.meta.env.VITE_authDomain,
+//   projectId: import.meta.env.VITE_projectId,
+//   storageBucket: import.meta.env.VITE_storageBucket,
+//   messagingSenderId: import.meta.env.VITE_messagingSenderId,
+//   appId: import.meta.env.VITE_appId,
+// };
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_apiKey,
-  authDomain: import.meta.env.VITE_authDomain,
-  projectId: import.meta.env.VITE_projectId,
-  storageBucket: import.meta.env.VITE_storageBucket,
-  messagingSenderId: import.meta.env.VITE_messagingSenderId,
-  appId: import.meta.env.VITE_appId,
+  apiKey: "AIzaSyDXPW5Hclixfbw-ZBPrKVn0ROMqva2SccE",
+  authDomain: "bistro-boss-8e1b2.firebaseapp.com",
+  projectId: "bistro-boss-8e1b2",
+  storageBucket: "bistro-boss-8e1b2.firebasestorage.app",
+  messagingSenderId: "51256654818",
+  appId: "1:51256654818:web:d12a1ee929e4df4a4ed7bb",
 };
 
+// Debugging: Log API Key to confirm it is loaded
+// console.log("API Key:", firebaseConfig.apiKey);
+
 // Initialize Firebase
-export const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+export default auth;

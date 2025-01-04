@@ -7,7 +7,8 @@ const Main = () => {
   // navbar and footer will not show in the login page
   const location = useLocation();
   console.log(location);
-  const noNavFooter = location.pathname.includes("login");
+  const noNavFooter =
+    location.pathname.includes("login") || location.pathname.includes("signup");
   return (
     <div>
       {noNavFooter || <NavBar></NavBar>}
