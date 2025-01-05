@@ -1,6 +1,29 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../../Provider/AuthPrvider";
 
 const NavBar = () => {
+  const { user, logOut } = useContext(AuthContext);
+  const handleLogOut = () => {
+    logOut()
+      .then((res) => {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Log Out successfull",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      })
+      .catch((error) => {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: `Opps..${error.message}`,
+          showConfirmButton: true,
+        });
+      });
+  };
   const link = (
     <>
       <li>
@@ -13,9 +36,23 @@ const NavBar = () => {
       <li>
         <Link to={"/order/salad"}>Order Food</Link>
       </li>
-      <li>
-        <Link to={"/login"}>Login</Link>
-      </li>
+      {user ? (
+        <>
+          {" "}
+          <li>
+            <Link to={"/login"}>Login</Link>
+          </li>
+        </>
+      ) : (
+        <>
+          {" "}
+          <li>
+            <button className="btn btn-ghost" onClick={handleLogOut}>
+              log Out
+            </button>
+          </li>
+        </>
+      )}
     </>
   );
   return (
