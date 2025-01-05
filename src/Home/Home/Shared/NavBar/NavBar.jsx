@@ -2,6 +2,8 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../../Provider/AuthPrvider";
 import Swal from "sweetalert2";
+import { CircleUserRound } from "lucide-react";
+import { BsCart4 } from "react-icons/bs";
 
 const NavBar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -11,7 +13,7 @@ const NavBar = () => {
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Log Out successfull",
+          title: "Log Out success",
           showConfirmButton: false,
           timer: 1500,
         });
@@ -40,13 +42,23 @@ const NavBar = () => {
       <li>
         <Link to={"/order/salad"}>Order Food</Link>
       </li>
+      <li>
+        <Link to={"/"}>
+          <button className="btn-ghost flex">
+            <BsCart4 className="text-xl" />
+            <div className="badge badge-info">+0</div>
+          </button>
+        </Link>
+      </li>
       {user ? (
         <>
           {" "}
           <li>
-            <button className=" btn-ghost" onClick={handleLogOut}>
-              log Out
-            </button>
+            <div>
+              <button className=" btn-ghost " onClick={handleLogOut}>
+                log Out
+              </button>
+            </div>
           </li>
         </>
       ) : (
@@ -88,14 +100,27 @@ const NavBar = () => {
             </ul>
           </div>
           <Link to={"/"} className="btn btn-ghost text-xl">
-            daisyUI
+            Bistro Boss
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{link}</ul>
         </div>
-        <div className="navbar-end">
-          <a className="btn">Button</a>
+        <div className="navbar-end mr-4">
+          <div
+            className=" tooltip  tooltip-bottom"
+            data-tip={`${user?.displayName}`}
+          >
+            {user ? (
+              <img
+                src={`${user?.photoURL}`}
+                alt="User Icon"
+                className="w-5 sm:w-10 rounded-full"
+              />
+            ) : (
+              <CircleUserRound />
+            )}
+          </div>
         </div>
       </div>
     </div>
