@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../../Provider/AuthPrvider";
+import Swal from "sweetalert2";
 
 const NavBar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -32,6 +33,9 @@ const NavBar = () => {
       <li>
         <Link to={"/menu"}>Our Menu</Link>
       </li>
+      <li>
+        <Link to={"/secret"}>Secret</Link>
+      </li>
 
       <li>
         <Link to={"/order/salad"}>Order Food</Link>
@@ -40,16 +44,16 @@ const NavBar = () => {
         <>
           {" "}
           <li>
-            <Link to={"/login"}>Login</Link>
+            <button className=" btn-ghost" onClick={handleLogOut}>
+              log Out
+            </button>
           </li>
         </>
       ) : (
         <>
           {" "}
           <li>
-            <button className="btn btn-ghost" onClick={handleLogOut}>
-              log Out
-            </button>
+            <Link to={"/login"}>Login</Link>
           </li>
         </>
       )}

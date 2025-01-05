@@ -1,17 +1,22 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   loadCaptchaEnginge,
   LoadCanvasTemplate,
   validateCaptcha,
 } from "react-simple-captcha";
 import { AuthContext } from "../../Provider/AuthPrvider";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import React from "react";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
 const Login = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const from = location.state?.form?.pathname || "/";
+
   const { login } = useContext(AuthContext);
-  const captchaRef = useRef(null);
+  // const captchaRef = useRef(null);
   const [disabled, setDisabled] = useState(true);
   useEffect(() => {
     loadCaptchaEnginge(6);
@@ -33,6 +38,7 @@ const Login = () => {
           showConfirmButton: false,
           timer: 1500,
         });
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         Swal.fire({
@@ -44,8 +50,8 @@ const Login = () => {
       });
   };
   // captcha validation
-  const handleValidateCaptcha = () => {
-    const user_captcha_value = captchaRef.current.value;
+  const handleValidateCaptcha = (e) => {
+    const user_captcha_value = e.target.value;
     if (validateCaptcha(user_captcha_value) === true) {
       console.log("captcha validate");
       setDisabled(false);
@@ -109,18 +115,19 @@ const Login = () => {
                   </label>
                   <input
                     type="text"
-                    ref={captchaRef}
+                    onBlur={handleValidateCaptcha}
+                    // ref={captchaRef}
                     placeholder="Type the text above"
                     name="captcha"
                     className="input input-bordered"
                     required
                   />
-                  <button
-                    onClick={handleValidateCaptcha}
-                    className="btn btn-outline btn-xs mt-2"
-                  >
-                    Validate
-                  </button>
+                  <div className="form-control">
+                    <label className="label cursor-pointer flex justify-start items-center gap-3">
+                      <input type="checkbox" className="checkbox" required />
+                      <span className="label-text">Are you Human</span>
+                    </label>
+                  </div>
                 </div>
                 <div className="form-control mt-6">
                   <input
