@@ -4,9 +4,11 @@ import { AuthContext } from "../../../../Provider/AuthPrvider";
 import Swal from "sweetalert2";
 import { CircleUserRound } from "lucide-react";
 import { BsCart4 } from "react-icons/bs";
+import UseCart from "../../../../hooks/UseCart/UseCart";
 
 const NavBar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [cart] = UseCart();
   const handleLogOut = () => {
     logOut()
       .then((res) => {
@@ -46,7 +48,7 @@ const NavBar = () => {
         <Link to={"/"}>
           <button className="btn-ghost flex">
             <BsCart4 className="text-xl" />
-            <div className="badge badge-info">+0</div>
+            <div className="badge badge-info">+{cart.length}</div>
           </button>
         </Link>
       </li>
