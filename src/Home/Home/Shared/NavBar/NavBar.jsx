@@ -45,7 +45,7 @@ const NavBar = () => {
         <Link to={"/order/salad"}>Order Food</Link>
       </li>
       <li>
-        <Link to={"/"}>
+        <Link to={"/dashboard/cart"}>
           <button className="btn-ghost flex">
             <BsCart4 className="text-xl" />
             <div className="badge badge-info">+{cart.length}</div>
