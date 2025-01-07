@@ -8,8 +8,10 @@ import {
 } from "react-icons/fa";
 import { MdOutlineReviews } from "react-icons/md";
 import { NavLink, Outlet } from "react-router-dom";
+import UseCart from "../hooks/UseCart/UseCart";
 
 const Dashbord = () => {
+  const [cart] = UseCart();
   return (
     <div className="flex">
       {/* dashboard nav section  */}
@@ -30,7 +32,7 @@ const Dashbord = () => {
           <li>
             <NavLink to={"/dashboard/cart"}>
               {" "}
-              <FaShoppingCart></FaShoppingCart>My cart
+              <FaShoppingCart></FaShoppingCart>My cart({cart.length})
             </NavLink>
           </li>
           <li>
