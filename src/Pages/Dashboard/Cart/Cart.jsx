@@ -1,9 +1,38 @@
 import React from "react";
 import UseCart from "../../../hooks/UseCart/UseCart";
+import { FaTrashAlt } from "react-icons/fa";
+import useAxiosSecure from "../../../hooks/AxiosSecure/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const Cart = () => {
-  const [cart] = UseCart();
+  const [cart, refetch] = UseCart();
   const totalPrice = cart.reduce((total, current) => total + current.price, 0);
+  const axiosSecure = useAxiosSecure();
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/carts/${id}`).then((res) => {
+          console.log(res);
+          if ("deletedCount") {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+            refetch();
+          }
+        });
+      }
+    });
+  };
   return (
     <div>
       <div className="flex justify-evenly items-center">
@@ -24,11 +53,9 @@ const Cart = () => {
             </tr>
           </thead>
           <tbody>
-            {cart.map((i) => (
+            {cart.map((i, idx) => (
               <tr key={i._id}>
-                <th>
-                  <input type="checkbox" />
-                </th>
+                <th>{idx + 1}</th>
                 <td>
                   <div className="flex items-center gap-3">
                     <div className="avatar">
@@ -54,7 +81,12 @@ const Cart = () => {
                 </td>
                 <td>Purple</td>
                 <th>
-                  <button className="btn btn-ghost btn-xs">details</button>
+                  <button
+                    onClick={() => handleDelete(i._id)}
+                    className="btn btn-ghost btn-lg"
+                  >
+                    <FaTrashAlt className="text-red-500" />
+                  </button>
                 </th>
               </tr>
             ))}
