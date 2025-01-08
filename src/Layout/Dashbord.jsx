@@ -12,6 +12,8 @@ import UseCart from "../hooks/UseCart/UseCart";
 
 const Dashbord = () => {
   const [cart] = UseCart();
+  // TODO :get isAdmin value from the database
+  const isAdmin = true;
   return (
     <div className="flex">
       {/* dashboard nav section  */}

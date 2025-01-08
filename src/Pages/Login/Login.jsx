@@ -9,6 +9,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import React from "react";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
+import SocialLogin from "../../Components/SocialLogin/SocialLogin";
 const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -132,21 +133,22 @@ const Login = () => {
                 <div className="form-control mt-6">
                   <input
                     disabled={disabled}
-                    className="btn btn-primary"
+                    className="btn btn-primary "
                     type="submit"
                     value="Login"
                   />
+                  <p className="text-left">
+                    {" "}
+                    <small>
+                      New here?
+                      <Link to={"/signup"} className="underline text-blue-500">
+                        Create an account
+                      </Link>
+                    </small>
+                  </p>
                 </div>
               </form>
-              <p className="text-center">
-                {" "}
-                <small>
-                  New here?
-                  <Link to={"/signup"} className="underline text-blue-500">
-                    Create an account
-                  </Link>
-                </small>
-              </p>
+              <SocialLogin></SocialLogin>
             </div>
           </div>
         </div>

@@ -5,6 +5,7 @@ import { AuthContext } from "../../Provider/AuthPrvider";
 import Swal from "sweetalert2";
 import { Link, useNavigate } from "react-router-dom";
 import UseAxiosPublic from "../../hooks/AxiosSecure/UseAxiosPublic";
+import SocialLogin from "../../Components/SocialLogin/SocialLogin";
 
 const Signup = () => {
   const axiosPublic = UseAxiosPublic();
@@ -155,23 +156,24 @@ const Signup = () => {
                     </a>
                   </label>
                 </div>
-                <div className="form-control mt-6">
+                <div className="form-control mt-6 ">
                   <input
                     type="submit"
                     value="Sign Up"
                     className="btn btn-primary"
                   />
                 </div>
+                <p className="text-left">
+                  {" "}
+                  <small>
+                    Already have an account
+                    <Link to={"/login"} className="underline text-blue-500">
+                      Login
+                    </Link>
+                  </small>
+                </p>
+                <SocialLogin></SocialLogin>
               </form>
-              <p className="text-center">
-                {" "}
-                <small>
-                  Already have an account
-                  <Link to={"/login"} className="underline text-blue-500">
-                    Login
-                  </Link>
-                </small>
-              </p>
             </div>
           </div>
         </div>
