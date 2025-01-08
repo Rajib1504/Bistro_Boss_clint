@@ -4,8 +4,10 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Provider/AuthPrvider";
 import Swal from "sweetalert2";
 import { Link, useNavigate } from "react-router-dom";
+import UseAxiosPublic from "../../hooks/AxiosSecure/UseAxiosPublic";
 
 const Signup = () => {
+  const axiosPublic = UseAxiosPublic();
   const { signup, updateUserProfile } = useContext(AuthContext);
   const navigate = useNavigate();
   const {
@@ -21,19 +23,26 @@ const Signup = () => {
     signup(email, password)
       .then((res) => {
         const user = res.user;
-        console.log(user);
+        // console.log(user);
         updateUserProfile(data.name, data.photoUrl)
           .then(() => {
-            console.log("userprofile is updated");
-            reset();
-            Swal.fire({
-              position: "top-end",
-              icon: "success",
-              title: `Sign Up by ${user.email}`,
-              showConfirmButton: false,
-              timer: 1500,
+            // console.log("userprofile is updated");
+            // before go for reset the from filds we need to take the data to the database for understand his role
+            const userInfo = { name: data.name, email: email };
+            axiosPublic.post("/users", userInfo).then((res) => {
+              if (res.data.insertedId) {
+                console.log("user created to the database");
+                reset();
+                Swal.fire({
+                  position: "top-end",
+                  icon: "success",
+                  title: `Sign Up by ${user.email}`,
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+                navigate("/");
+              }
             });
-            navigate("/");
           })
           .catch((err) => {
             console.log(err.message);
