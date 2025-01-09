@@ -8,12 +8,14 @@ const AllUsers = () => {
   const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/users", {
-        //we need to set a header with bearer for get the token here because localstorage is not giving value automatic
-        headers: {
-          authorization: `Bearer${localStorage.getItem("access-token")}`,
-        },
-      });
+      const res = await axiosSecure.get(
+        "/users"
+        //we need to set a header with bearer for get the token here because localstorage is not giving value automatically
+        //{ headers: {
+        //   authorization: `Bearer ${localStorage.getItem("access-token")}`,
+        // },
+        // }
+      );
       return res.data;
     },
   });
