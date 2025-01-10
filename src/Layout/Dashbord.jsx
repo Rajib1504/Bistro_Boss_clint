@@ -13,11 +13,12 @@ import {
 import { MdOutlineReviews } from "react-icons/md";
 import { NavLink, Outlet } from "react-router-dom";
 import UseCart from "../hooks/UseCart/UseCart";
+import UseAdmin from "../hooks/UseAdmin/UseAdmin";
 
 const Dashbord = () => {
   const [cart] = UseCart();
   // TODO :get isAdmin value from the database
-  const isAdmin = true;
+  const [isAdmin] = UseAdmin();
   return (
     <div className="flex">
       {/* dashboard nav section  */}
