@@ -1,9 +1,13 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import UseAuth from "../useAuth/UseAuth";
 
 const axiossecure = axios.create({
   baseURL: "http://localhost:5000",
 });
 const useAxiosSecure = () => {
+  const navigate = useNavigate();
+  const { logOut } = UseAuth();
   //request interceptor to add authorization header for every secure call to the api
   axiossecure.interceptors.request.use(
     function (config) {
@@ -22,9 +26,14 @@ const useAxiosSecure = () => {
     function (response) {
       return response;
     },
-    (error) => {
+    async (error) => {
+      //we can use async and await for fetch the logout btn or we can do it with then too
       const status = error.response.status;
       console.log("status error in the interceptor:", status);
+      if (status === 401 || 403) {
+        await logOut();
+        navigate("/");
+      }
       return Promise.reject(error);
     }
   );

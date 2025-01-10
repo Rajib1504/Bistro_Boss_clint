@@ -67,7 +67,7 @@ const AuthPrvider = ({ children }) => {
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [axiosPublic]);
   const authInfo = {
     user,
     setUser,
