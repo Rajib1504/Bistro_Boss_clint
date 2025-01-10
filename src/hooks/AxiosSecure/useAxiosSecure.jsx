@@ -33,7 +33,7 @@ const useAxiosSecure = () => {
       //for 401 or 403 layout the user and move the user to the login page
       if (status === 401 || 403) {
         await logOut();
-        navigate("/");
+        navigate("/login");
       }
       return Promise.reject(error);
     }
