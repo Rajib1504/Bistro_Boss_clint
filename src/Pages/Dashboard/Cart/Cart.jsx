@@ -3,6 +3,7 @@ import UseCart from "../../../hooks/UseCart/UseCart";
 import { FaTrashAlt } from "react-icons/fa";
 import useAxiosSecure from "../../../hooks/AxiosSecure/useAxiosSecure";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const [cart, refetch] = UseCart();
@@ -36,9 +37,15 @@ const Cart = () => {
   return (
     <div>
       <div className="flex justify-evenly items-center">
-        <h2 className="text-4xl">Items:{cart.length}</h2>
-        <h2 className="text-4xl">Total price: {totalPrice}</h2>
-        <button className="btn btn-primary">Pay</button>
+        <h2 className="text-2xl">Items:{cart.length}</h2>
+        <h2 className="text-2xl">Total price: {totalPrice}</h2>
+        {cart.length ? (
+          <Link to={"/dashboard/payment"}>
+            <button className="btn btn-primary">Pay</button>
+          </Link>
+        ) : (
+          <button className="btn disabled btn-primary">Pay</button>
+        )}
       </div>
       <div className="overflow-x-auto">
         <table className="table">
@@ -60,26 +67,13 @@ const Cart = () => {
                   <div className="flex items-center gap-3">
                     <div className="avatar">
                       <div className="mask mask-squircle h-12 w-12">
-                        <img
-                          src={i.image}
-                          alt="Avatar Tailwind CSS Component"
-                        />
+                        <img src={i.image} alt="image" />
                       </div>
-                    </div>
-                    <div>
-                      <div className="font-bold">Hart Hagerty</div>
-                      <div className="text-sm opacity-50">United States</div>
                     </div>
                   </div>
                 </td>
-                <td>
-                  Zemlak, Daniel and Leannon
-                  <br />
-                  <span className="badge badge-ghost badge-sm">
-                    Desktop Support Technician
-                  </span>
-                </td>
-                <td>Purple</td>
+                <td className="text-bold">{i.name}</td>
+                <td>{i.price}</td>
                 <th>
                   <button
                     onClick={() => handleDelete(i._id)}
