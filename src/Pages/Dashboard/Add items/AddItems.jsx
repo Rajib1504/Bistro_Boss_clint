@@ -27,7 +27,7 @@ const AddItems = () => {
         recipe: data.recipe,
         category: data.category,
         price: parseFloat(data.price),
-        image: res.data.display_url,
+        image: res.data.data.display_url,
       };
       //
       const menuResult = await asioxSecure.post("/menu", menuItem);
@@ -37,7 +37,7 @@ const AddItems = () => {
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: `${data.name}is successfully addedd`,
+          title: `${data.name} is successfully addedd`,
           showConfirmButton: false,
           timer: 1500,
         });
