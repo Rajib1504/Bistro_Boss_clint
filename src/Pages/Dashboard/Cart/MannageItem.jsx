@@ -4,6 +4,7 @@ import useMenu from "../../../hooks/hooks menu/useMenu";
 
 import useAxiosSecure from "../../../hooks/AxiosSecure/useAxiosSecure";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const MannageItem = () => {
   const axiosSecure = useAxiosSecure();
@@ -35,10 +36,7 @@ const MannageItem = () => {
       }
     });
   };
-  const handleUpdateItem = async (item) => {
-    //     const update = await axiosSecure.patch(`/menu/${item._id}`);
-    //     console.log(update.data);
-  };
+
   return (
     <div>
       <SectionTitle
@@ -86,13 +84,12 @@ const MannageItem = () => {
                 </td>
 
                 <td>
-                  <button
-                    onClick={() => handleUpdateItem(item)}
-                    className="btn bg-orange-500"
-                  >
-                    {" "}
-                    <FaEdit className="text-white text-lg"></FaEdit>
-                  </button>
+                  <Link to={`/dashboard/updateItem/${item._id}`}>
+                    <button className="btn bg-orange-500">
+                      {" "}
+                      <FaEdit className="text-white text-lg"></FaEdit>
+                    </button>
+                  </Link>
                 </td>
                 <td>
                   <button
