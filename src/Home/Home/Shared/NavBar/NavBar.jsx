@@ -2,9 +2,10 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../../Provider/AuthPrvider";
 import Swal from "sweetalert2";
-import { CircleUserRound } from "lucide-react";
+
 import { BsCart4 } from "react-icons/bs";
 import UseCart from "../../../../hooks/UseCart/UseCart";
+import { CircleUserRound } from "lucide-react";
 
 const NavBar = () => {
   const { user, logOut } = useContext(AuthContext);

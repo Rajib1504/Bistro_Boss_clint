@@ -2,6 +2,7 @@ import { FaGoogle } from "react-icons/fa";
 import UseAuth from "../../hooks/useAuth/UseAuth";
 import UseAxiosPublic from "../../hooks/AxiosSecure/UseAxiosPublic";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const SocialLogin = () => {
   const axiosPublic = UseAxiosPublic();
@@ -14,9 +15,17 @@ const SocialLogin = () => {
         email: res.user?.email,
         name: res.user?.displayName,
       };
+      console.log(userInfo);
       axiosPublic.post("/users", userInfo).then((res) => {
         const user = res.data;
         console.log(user);
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Log in success",
+          showConfirmButton: false,
+          timer: 1500,
+        });
         navigate("/");
       });
     });
