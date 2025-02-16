@@ -15,7 +15,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const from = location.state?.form?.pathname || "/";
-
+console.log('state in the location',location.state)
   const { login } = useContext(AuthContext);
   // const captchaRef = useRef(null);
   const [disabled, setDisabled] = useState(true);
